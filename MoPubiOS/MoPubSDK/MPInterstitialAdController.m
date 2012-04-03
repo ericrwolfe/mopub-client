@@ -26,7 +26,6 @@ static NSString * const kOrientationBoth				= @"b";
 @interface MPInterstitialAdController ()
 
 @property (nonatomic, assign) InterstitialCloseButtonStyle closeButtonStyle;
-@property (nonatomic, retain) UIButton *closeButton;
 @property (nonatomic, retain) MPBaseInterstitialAdapter *currentAdapter;
 
 - (id)initWithAdUnitId:(NSString *)ID parentViewController:(UIViewController *)parent;
@@ -50,6 +49,7 @@ static NSString * const kOrientationBoth				= @"b";
 @synthesize location;
 @synthesize locationEnabled;
 @synthesize locationPrecision;
+@synthesize adView = _adView;
 
 #pragma mark -
 #pragma mark Class methods
@@ -298,6 +298,12 @@ static NSString * const kOrientationBoth				= @"b";
 {
 	_ready = NO;
 	[_adView loadAd];
+}
+
+- (void)loadAdWithURL:(NSURL*)url
+{
+    _ready = NO;
+    [_adView loadAdWithURL:url];
 }
 
 - (void)show

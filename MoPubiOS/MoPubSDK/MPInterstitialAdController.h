@@ -74,6 +74,8 @@ typedef NSUInteger InterstitialOrientationType;
 @property (nonatomic, assign) BOOL locationEnabled;
 @property (nonatomic, assign) NSUInteger locationPrecision;
 @property (nonatomic, assign) BOOL adWantsNativeCloseButton;
+@property (nonatomic, readonly, retain) MPAdView* adView;
+@property (nonatomic, retain) UIButton *closeButton;
 
 /*
  * A shared pool of interstitial ads.
@@ -97,6 +99,7 @@ typedef NSUInteger InterstitialOrientationType;
  * This method does not automatically retry if it fails.
  */
 - (void)loadAd;
+- (void)loadAdWithURL:(NSURL*)url;
 
 /*
  * Display the interstitial modally.

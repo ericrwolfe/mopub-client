@@ -926,7 +926,18 @@ NSString * const kAdTypeMraid = @"mraid";
 		}
 		
 		return NO;
-	}
+	}else {
+        NSString *host = [URL host];
+        if ([host isEqual:@"localhost"]||[host isEqual:@"alltrails.com"]||[host isEqual:@"allsnow.com"]) {
+            _isLoading = NO;
+            
+            [self setAdContentView:webView];
+            [self scheduleAutorefreshTimerIfEnabled];
+            
+            if ([self.adView.delegate respondsToSelector:@selector(adViewDidLoadAd:)]) 
+                [self.adView.delegate adViewDidLoadAd:self.adView];
+        }
+    }
 	
 	// Intercept non-click forms of navigation (e.g. "window.location = ...") if the target URL
 	// has the interceptURL prefix. Launch the ad browser.
