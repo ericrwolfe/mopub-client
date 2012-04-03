@@ -615,6 +615,12 @@ NSString * const kAdTypeMraid = @"mraid";
 	if (!typeHeader || [typeHeader isEqualToString:kAdTypeClear]) {
 		[self replaceCurrentAdapterWithAdapter:nil];
 		
+        NSString *host = [[response URL] host];
+        if ([host isEqual:@"localhost"]||[host isEqual:@"alltrails.com"]||[host isEqual:@"allsnow.com"]) {
+            // HTML ad, so just return. connectionDidFinishLoading: will take care of the rest.
+            return;
+        }
+        
 		// Show a blank.
 		MPLogInfo(@"No ad available");
 		[connection cancel];
